@@ -10,3 +10,11 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// new Vue({
+//   el: '#app',
+//   router,
+//   store,
+//   template: '<App/>',
+//   components: { App }
+// })
