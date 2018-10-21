@@ -2,19 +2,22 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import firebase from 'firebase'
 
 Vue.config.productionTip = false
+
+var config = {
+  apiKey: 'AIzaSyB20KvGNExHfCWuiDrsAHXIBRX9WqYaEd8',
+  authDomain: 'vue-example1.firebaseapp.com',
+  databaseURL: 'https://vue-example1.firebaseio.com',
+  projectId: 'vue-example1',
+  storageBucket: 'vue-example1.appspot.com',
+  messagingSenderId: '686205830736'
+}
+firebase.initializeApp(config)
 
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
-
-// new Vue({
-//   el: '#app',
-//   router,
-//   store,
-//   template: '<App/>',
-//   components: { App }
-// })

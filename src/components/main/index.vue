@@ -1,7 +1,7 @@
 <template>
-  <footer id="footer">
-    footer
-  </footer>
+  <section id="main">
+    main
+  </section>
 </template>
 
 <script>
