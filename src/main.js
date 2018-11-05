@@ -1,10 +1,14 @@
 import Vue from 'vue'
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import firebase from 'firebase'
 
 Vue.config.productionTip = false
+
+Vue.use(Antd)
 
 var config = {
   apiKey: 'AIzaSyB20KvGNExHfCWuiDrsAHXIBRX9WqYaEd8',

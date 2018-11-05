@@ -13,3 +13,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+#main {
+  padding:100px;
+}
+</style>
+

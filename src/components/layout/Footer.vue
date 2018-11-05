@@ -1,6 +1,8 @@
 <template>
   <footer id="footer">
-    footer
+    <p>
+      © 2018 by <strong>Dongchun Lee</strong>
+    </p>
   </footer>
 </template>
 
@@ -13,3 +15,13 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+#footer {
+  padding:40px;
+  color:#fff;
+  font-size:12px;
+  background-color:#5c8d89;
+  text-align: center;
+}
+</style>
+
