@@ -69,6 +69,15 @@ export default new Vuex.Store({
           commit('loginSuccess');
         }
       });
+    },
+
+    signOut: ({ state }) => {
+      firebase.auth().signOut().then(() => {
+        state.loginState = false;
+        globalEvent.$emit('loginOut');
+        localstorage.removeItem('userEmail');
+        localstorage.removeItem('userUid');
+      })
     }
 
   }

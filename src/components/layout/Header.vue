@@ -43,7 +43,7 @@
             <a-avatar icon="user" />
           </a-tooltip>
         </li>
-        <li v-if="isLogin" @click="logOut">
+        <li v-if="isLogin" @click="signOut">
           <a-tooltip placement="bottomRight" title="Sign Out">
             <a-avatar icon="logout" />
           </a-tooltip>
@@ -70,19 +70,10 @@ export default {
     this.$store.commit('userInfoMutation');
   },
   computed: {
-    ...mapGetters([
-      'isLogin'
-    ])
+    ...mapGetters(['isLogin'])
   },
   methods: {
-    logOut() {
-      firebase.auth().signOut().then(() => {
-        this.$store.state.loginState = false;
-        globalEvent.$emit('loginOut');
-        window.localStorage.removeItem('userEmail');
-        window.localStorage.removeItem('userUid');
-      })
-    }
+    ...mapActions(['signOut'])
   }
 }
 </script>
@@ -103,6 +94,7 @@ export default {
     li {
       display:inline-block;
       margin:0 5px;
+      cursor:pointer;
       span {
         background-color:#35af00;
       }

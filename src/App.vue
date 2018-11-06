@@ -21,6 +21,7 @@ export default {
     Footer
   },
   mounted(){
+    // 로그인 성공
     globalEvent.$on('loginSuccess', user => {
       this.$notification.success({
         message: 'Sign In Success',
@@ -28,6 +29,7 @@ export default {
       });
     });
 
+    // 로그인 실패
     globalEvent.$on('loginFail', msg => {
       this.$notification.error({
         message: 'Sign In Failed',
@@ -35,6 +37,7 @@ export default {
       });
     });
 
+    // 로그아웃
     globalEvent.$on('loginOut', () => {
       this.$notification.info({
         message: 'Sign Out',
