@@ -46,6 +46,7 @@ export default new Vuex.Store({
   },
   actions: {
     signInUser: ({ state, dispatch }, user) => {
+      globalEvent.$emit('loadingShow');
       firebase.auth().signInWithEmailAndPassword(state.email, state.password).then(() => {
         console.log('login success');
         dispatch('signInAuthState');
@@ -53,6 +54,7 @@ export default new Vuex.Store({
       .catch((error)=> {
         console.log(error.code);
         globalEvent.$emit('loginFail', error.message);
+        globalEvent.$emit('loadingHide');
       })
     },
     
@@ -60,23 +62,28 @@ export default new Vuex.Store({
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           const { email, uid } = user;
+          const emailId = email.split('@')[0];
           state.userInfo.email = email;
           state.userInfo.uid = uid;
           localstorage.setItem('userEmail', email);
           localstorage.setItem('userUid', uid);
-          globalEvent.$emit('loginSuccess', email);
+          globalEvent.$emit('loginSuccess', emailId); // email 에서 id 만 짜름
           router.push('/');
+
           commit('loginSuccess');
+          globalEvent.$emit('loadingHide');
         }
       });
     },
 
     signOut: ({ state }) => {
+      globalEvent.$emit('loadingShow');
       firebase.auth().signOut().then(() => {
         state.loginState = false;
         globalEvent.$emit('loginOut');
         localstorage.removeItem('userEmail');
         localstorage.removeItem('userUid');
+        globalEvent.$emit('loadingHide');
       })
     }
 

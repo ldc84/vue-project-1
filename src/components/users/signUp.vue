@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { globalEvent } from '@/common/event';
 import firebase from 'firebase'
 
 function hasErrors (fieldsError) {
@@ -75,11 +76,7 @@ export default {
     // firebase 회원가입
     SignUp (values) {
 
-      // sign-out
-      // firebase.auth().signOut()
-
-      // sign-in
-      // firebase.auth().signInWithEmailAndPassword(email, password)
+      globalEvent.$emit('loadingShow');
 
       // sign-up
       firebase.auth().createUserWithEmailAndPassword(values.userEmail, values.password)
@@ -90,9 +87,11 @@ export default {
             description: '회원가입이 완료되었습니다.',
           });
           this.$router.push('/');
+          globalEvent.$emit('loadingHide');
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
+          globalEvent.$emit('loadingHide');
         })
       // this.$store.dispatch('signUp');
     },

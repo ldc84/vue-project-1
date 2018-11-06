@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <Header />
-    <div id="body">
-      <router-view></router-view>
-    </div>
-    <Footer />
+    <a-spin :spinning="loading">
+      <Header />
+      <div id="body">
+        <router-view></router-view>
+      </div>
+      <Footer />
+    </a-spin>
   </div>
 </template>
 
@@ -16,11 +18,17 @@ import '@/assets/style.css';
 
 export default {
   name: 'Index',
+  data(){
+    return {
+      loading : false
+    }
+  },
   components: {
     Header,
     Footer
   },
   created(){
+    // Notification Custom
     this.$notification.config({
       placement: 'bottomRight',
       bottom: '50px',
@@ -28,6 +36,14 @@ export default {
     });
   },
   mounted(){
+    // loading
+    globalEvent.$on('loadingShow', () => {
+      this.loading = true;
+    });
+    globalEvent.$on('loadingHide', () => {
+      this.loading = false;
+    });
+
     // 로그인 성공
     globalEvent.$on('loginSuccess', user => {
       this.$notification.success({
