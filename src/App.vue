@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { globalEvent } from '@/common/event';
 import Header from '~@/layout/Header.vue';
 import Footer from '~@/layout/Footer.vue';
 import '@/assets/style.css';
@@ -18,6 +19,29 @@ export default {
   components: {
     Header,
     Footer
+  },
+  mounted(){
+    globalEvent.$on('loginSuccess', user => {
+      this.$notification.success({
+        message: 'Sign In Success',
+        description: `${user}님 방문해주셔서 감사합니다.`,
+      });
+    });
+
+    globalEvent.$on('loginFail', msg => {
+      this.$notification.error({
+        message: 'Sign In Failed',
+        description: msg,
+      });
+    });
+
+    globalEvent.$on('loginOut', () => {
+      this.$notification.info({
+        message: 'Sign Out',
+        description: '로그아웃이 완료되었습니다.',
+      });
+      this.$router.push('/');
+    });
   }
 }
 </script>

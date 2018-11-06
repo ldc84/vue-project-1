@@ -24,17 +24,29 @@
       </nav>
       
       <ul class="top-utill">
-        <li>
-          <router-link to="/SignUp"><a-avatar icon="user-add" /></router-link>
+        <li v-if="!isLogin">
+            <router-link to="/SignUp">
+              <a-tooltip placement="bottomRight" title="Sign Up">
+                <a-avatar icon="user-add" />
+              </a-tooltip>
+            </router-link>
         </li>
-        <li>
-          <router-link to="/"><a-avatar icon="login" /></router-link>
+        <li v-if="!isLogin">
+          <router-link to="/SignIn">
+            <a-tooltip placement="bottomRight" title="Sign In">
+              <a-avatar icon="login" />
+            </a-tooltip>
+          </router-link>
         </li>
-        <li>
-          <router-link to="/"><a-avatar icon="user" /></router-link>
+        <li v-if="isLogin">
+          <a-tooltip placement="bottomRight" :title="this.$store.state.userInfo.email">
+            <a-avatar icon="user" />
+          </a-tooltip>
         </li>
-        <li>
-          <router-link to="/"><a-avatar icon="logout" /></router-link>
+        <li v-if="isLogin" @click="logOut">
+          <a-tooltip placement="bottomRight" title="Sign Out">
+            <a-avatar icon="logout" />
+          </a-tooltip>
         </li>
       </ul>
 
@@ -43,10 +55,33 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+import { mapGetters, mapActions } from 'vuex';
+import { globalEvent } from '@/common/event';
+
 export default {
   data() {
     return {
 
+    }
+  },
+  created(){
+    // 로컬 스토리지 정보 받아오기
+    this.$store.commit('userInfoMutation');
+  },
+  computed: {
+    ...mapGetters([
+      'isLogin'
+    ])
+  },
+  methods: {
+    logOut() {
+      firebase.auth().signOut().then(() => {
+        this.$store.state.loginState = false;
+        globalEvent.$emit('loginOut');
+        window.localStorage.removeItem('userEmail');
+        window.localStorage.removeItem('userUid');
+      })
     }
   }
 }

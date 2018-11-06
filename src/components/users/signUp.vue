@@ -12,9 +12,7 @@
             {required: true, message: 'Please input your E-mail!'}
           ]}"
         >
-          <a-input placeholder='User Email' size='large'>
-            <a-icon slot="prefix" type='user' style="color:rgba(0,0,0,.25)"/>
-          </a-input>
+          <a-input placeholder='User Email' size='large' />
         </a-form-item>
         <a-form-item
           :validateStatus="ErrorCheck('password') ? 'error' : ''"
@@ -25,9 +23,18 @@
             { required: true, message: 'Please input your Password!' }
           ]}"
         >
-          <a-input type='password' size='large' placeholder='Password'>
-            <a-icon slot="prefix" type='lock' style="color:rgba(0,0,0,.25)"/>
-          </a-input>
+          <a-input type='password' size='large' placeholder='Password' />
+        </a-form-item>
+        <a-form-item
+          :validateStatus="ErrorCheck('passwordConfirm') ? 'error' : ''"
+          :help="ErrorCheck('passwordConfirm') || ''"
+          fieldDecoratorId="passwordConfirm"
+          :fieldDecoratorOptions="{rules: [
+            { required: true, message: 'Please input your Password!' },
+            { validator: compareToFirstPassword }
+          ]}"
+        >
+          <a-input type='password' size='large' placeholder='Password Confirm' />
         </a-form-item>
         <a-form-item class="item-center">
           <a-button
@@ -65,6 +72,7 @@ export default {
   },
   methods: {
 
+    // firebase 회원가입
     SignUp (values) {
 
       // sign-out
@@ -94,6 +102,16 @@ export default {
       const { getFieldError, isFieldTouched } = this.form
       return isFieldTouched(val) && getFieldError(val)
     },
+
+    compareToFirstPassword  (rule, value, callback) {
+      const form = this.form
+      if (value && value !== form.getFieldValue('password')) {
+        callback('Two passwords that you enter is inconsistent!')
+      } else {
+        callback()
+      }
+    },
+
     handleSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
@@ -109,7 +127,7 @@ export default {
 
 <style scoped>
 #signUp {
-  padding:0 0 0 0;
+  padding:0;
 }
 
 </style>
