@@ -20,6 +20,13 @@ export default {
     Header,
     Footer
   },
+  created(){
+    this.$notification.config({
+      placement: 'bottomRight',
+      bottom: '50px',
+      duration: 3,
+    });
+  },
   mounted(){
     // 로그인 성공
     globalEvent.$on('loginSuccess', user => {
