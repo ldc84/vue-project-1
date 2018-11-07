@@ -59,7 +59,7 @@ export default new Vuex.Store({
     },
     
     signInAuthState: ({ commit, state }) => {
-      firebase.auth().onAuthStateChanged(function (user) {
+      firebase.auth().onAuthStateChanged( user => {
         if (user) {
           const { email, uid } = user;
           const emailId = email.split('@')[0];
@@ -74,6 +74,12 @@ export default new Vuex.Store({
           globalEvent.$emit('loadingHide');
         }
       });
+    },
+
+    updateUserInfo: ({ state }) => {
+      firebase.auth().onAuthStateChanged( user => {
+        (user) ? state.loginState = true : state.loginState = false ;
+      })
     },
 
     signOut: ({ state }) => {

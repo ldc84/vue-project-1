@@ -5,12 +5,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import firebase from 'firebase'
+import axios from 'axios'
 
 import _ from 'lodash'
 
 Vue.config.productionTip = false
 
 Vue.use(Antd)
+Vue.prototype.$http = axios
 
 var config = {
   apiKey: 'AIzaSyB20KvGNExHfCWuiDrsAHXIBRX9WqYaEd8',
