@@ -9,16 +9,16 @@
       <nav id="gnb">
         <ul>
           <li>
-            <router-link to="">네비1</router-link>
+            <router-link to="/instagram">Instagram</router-link>
           </li>
           <li>
-            <router-link to="">네비2</router-link>
+            <router-link to="">nav2</router-link>
           </li>
           <li>
-            <router-link to="">네비3</router-link>
+            <router-link to="">nav3</router-link>
           </li>
           <li>
-            <router-link to="">네비4</router-link>
+            <router-link to="">nav4</router-link>
           </li>
         </ul>
       </nav>
@@ -90,7 +90,7 @@ export default {
   }
 
   .top-utill {
-    position:absolute; top:10px; right:0;
+    position:absolute; top:10px; right:10px;
     li {
       display:inline-block;
       margin:0 5px;
@@ -114,6 +114,8 @@ export default {
       color:#fff;
       font-size:16px;
       font-weight:700;
+      opacity:.8;
+      transition:all .2s ease-in-out;
       &:after {
         content:'';
         display:block;
@@ -126,6 +128,7 @@ export default {
 
       &.active,
       &:hover {
+        opacity:1;
         &:after {
           left:0;
           width:100%;

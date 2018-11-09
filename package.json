@@ -10,6 +10,7 @@
   "dependencies": {
     "ant-design-vue": "^1.1.7",
     "axios": "^0.18.0",
+    "babel-loader": "^8.0.4",
     "css-loader": "^1.0.1",
     "firebase": "^5.5.5",
     "lodash": "^4.17.11",
