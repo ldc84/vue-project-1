@@ -9,7 +9,7 @@
       <nav id="gnb">
         <ul>
           <li>
-            <router-link to="/instagram">Instagram</router-link>
+            <router-link to="">nav1</router-link>
           </li>
           <li>
             <router-link to="">nav2</router-link>

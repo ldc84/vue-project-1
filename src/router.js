@@ -8,8 +8,6 @@ import Main from '~@/main/'
 import SignUp from '~@/users/signUp'
 import SignIn from '~@/users/signIn'
 
-import Instagram from '~@/instagram/'
-
 Vue.use(Router)
 
 const LOGIN_ONLY = (to, from, next) => {
@@ -54,12 +52,6 @@ export default new Router({
       name: 'SingIn',
       component: SignIn,
       beforeEnter: NOT_LOGIN_ONLY
-    },
-    {
-      path: '/Instagram',
-      name: 'Instagram',
-      component: Instagram,
-      beforeEnter: LOGIN_ONLY
-    },
+    }
   ]
 })

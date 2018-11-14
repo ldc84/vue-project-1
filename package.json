@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "deploy": "node ./node_modules/vue-gh-pages/index.js -b gh-pages"
   },
   "dependencies": {
     "ant-design-vue": "^1.1.7",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.5",
     "@vue/cli-service": "^3.0.5",
+    "vue-gh-pages": "^1.19.0",
     "vue-template-compiler": "^2.5.17"
   },
   "postcss": {
@@ -35,5 +37,7 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "wst": "/dist/",
+  "homepage": "https://github.com/ldc84/vue-project-1"
 }
